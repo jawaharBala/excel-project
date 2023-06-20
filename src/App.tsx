@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import {useEffect} from 'react';
 import './App.css';
+import { Route, Routes } from "react-router-dom";
+import {useSelector,useDispatch} from "react-redux"
+import NavBar from './components/navigation/navbar';
+import Footer from './components/navigation/footer';
+import Login from './components/login-signup/LoginPage';
+import SignUp from './components/login-signup/SignUpPage';
+import Home from './components/home/Home';
+import { setUser } from './state_management/slices/UserSlice';
+import Spreadsheet from './components/spreadsheet/Spreadhseet';
 
 function App() {
+const user = useSelector((store:any)=>store.user);
+const dispatch = useDispatch();
+useEffect(()=>{
+  console.log(user)
+},[user]);
+useEffect(()=>{
+  dispatch(setUser("jawahar"))
+},[]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <NavBar/>
+      <Routes>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path="/login" element={<Login/>}></Route>
+        <Route path="/signup" element={<SignUp/>}></Route>
+        <Route path="/spreadsheet" element={<Spreadsheet/>}></Route>
+      </Routes>
+      <Footer/>
     </div>
   );
 }
