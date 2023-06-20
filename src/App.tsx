@@ -1,4 +1,3 @@
-import {useEffect} from 'react';
 import './App.css';
 import { Route, Routes } from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux"
@@ -11,14 +10,7 @@ import { setUser } from './state_management/slices/UserSlice';
 import Spreadsheet from './components/spreadsheet/Spreadhseet';
 
 function App() {
-const user = useSelector((store:any)=>store.user);
-const dispatch = useDispatch();
-useEffect(()=>{
-  console.log(user)
-},[user]);
-useEffect(()=>{
-  dispatch(setUser("jawahar"))
-},[]);
+
   return (
     <div className="App">
        <NavBar/>
